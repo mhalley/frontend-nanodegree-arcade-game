@@ -1,7 +1,10 @@
+//Create random numbers for rates in the game
 function randomized (max, min) {
     //generate a random number
     return Math.floor((Math.random()* (max - min)) + min);
 };
+
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -33,6 +36,8 @@ Enemy.prototype.update = function(dt) {
         this.x = -100;
     }
 };
+
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -94,11 +99,33 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+Player.prototype.collide = function(){
+    for (var i=0; i < allEnemies.length; i++) {
+        if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x && this.y < allEnemies[i].y + 30 && this.y + 30 > allEnemies[i].y) {
+            console.log("Oops!");
+            resetPlayer();
+            break;
+        }
+    }
+}
+
+Player.prototype.win = function() {
+    for (var i=0; i < allEnemies.length; i++) {
+        if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x && this.y < allEnemies[i].y + 30 && this.y + 30 > allEnemies[i].y) {
+            console.log("Hooray! You made it across!");
+            resetPlayer();
+            allEnemies[i].bugReset();
+            break;
+        }
+    }
+}
+
 //Check player's location relative to enemies
 Player.prototype.update = function(dt) {
     //check for collisions
-    checkCollisions();
+    player.collide();
  };
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
@@ -111,32 +138,12 @@ var allEnemies = [
 //create player
 var player = new Player();
 
-
-
-//function death() {
-//    alert("Aw, they got you. Try again!");
-//    resetPlayer();
-//};
-
-//var resetPlayer = function() {
-//    player.x = (ctx.canvas.width / 2) - (101/2);
-//    player.y = 475;
-//};
-
-//Check for collisions between enemies and player
-function checkCollisions() {
-    if(allEnemies.length >= 1) {
-        allEnemies.forEach(function(enemy){
-            if(player.y === enemy.y && player.x < (enemy.x + 80)) {
-                if(player.x > (enemy.x - 80)) {
-                    //if collide, send back to square 1
-                    player.x = 303;
-                    player.y = 476;
-                }
-            }
-        });
-    }
+var resetPlayer = function() {
+    player.x = (ctx.canvas.width / 2) - (101/2);
+    player.y = 425;
 };
+
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
