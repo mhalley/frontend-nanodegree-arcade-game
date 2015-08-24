@@ -37,7 +37,10 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-
+Enemy.prototype.enemyReset = function(){
+    for (var i=0; i < allEnemies.length; i++)
+        allEnemies[i].x = -200;
+}
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -111,10 +114,10 @@ Player.prototype.collide = function(){
 
 Player.prototype.win = function() {
     for (var i=0; i < allEnemies.length; i++) {
-        if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x && this.y < allEnemies[i].y + 30 && this.y + 30 > allEnemies[i].y) {
+        if (this.y <= -10) {
             console.log("Hooray! You made it across!");
             resetPlayer();
-            allEnemies[i].bugReset();
+            allEnemies[i].enemyReset();
             break;
         }
     }
@@ -124,6 +127,7 @@ Player.prototype.win = function() {
 Player.prototype.update = function(dt) {
     //check for collisions
     player.collide();
+    player.win();
  };
 
 // Now instantiate your objects.
