@@ -115,13 +115,21 @@ Player.prototype.collide = function(){
 Player.prototype.win = function() {
     for (var i=0; i < allEnemies.length; i++) {
         if (this.y <= -10) {
-            console.log("Hooray! You made it across!");
-            resetPlayer();
-            allEnemies[i].enemyReset();
+            prompt("Hooray! You made it across! Would you like to play again?");
+                if (userAnswer === "yes"){
+                    resetPlayer();  
+                    allEnemies[i].enemyReset();
+                } else {
+                    prompt("O.K. Thanks for playing!");
+                }
             break;
         }
     }
 }
+
+var userAnswer = prompt("Do you want to race Bieber on stage?");
+
+
 
 //Check player's location relative to enemies
 Player.prototype.update = function(dt) {
