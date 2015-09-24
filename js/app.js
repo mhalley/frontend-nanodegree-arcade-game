@@ -16,8 +16,9 @@ var Enemy = function() {
     //set position horizontally
     this.x = randomized(505, 1);
     //set row
-    this.row = [61, 144, 310, 300];
-    this.y = randomized(this.row[0], this.row[3]);
+    this.row = [61, 144, 310, 500];
+    this.y = this.row[Math.floor(Math.random()* this.row.length)]
+    //this.y = randomized(this.row[0], this.row[3]);
     //set speed for Enemy
     this.speed = randomized(115, 50);
 };
@@ -117,18 +118,15 @@ Player.prototype.win = function() {
         if (this.y <= -10) {
             prompt("Hooray! You made it across! Would you like to play again?");
                 if (userAnswer === "yes"){
-                    resetPlayer();  
+                    resetPlayer();
                     allEnemies[i].enemyReset();
                 } else {
-                    prompt("O.K. Thanks for playing!");
+                    alert("O.K. Thanks for playing!");
                 }
             break;
         }
     }
 }
-
-var userAnswer = prompt("Do you want to race Bieber on stage?");
-
 
 
 //Check player's location relative to enemies
