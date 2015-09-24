@@ -2,8 +2,8 @@
 function randomized (max, min) {
     //generate a random number
     return Math.floor((Math.random()* (max - min)) + min);
+    //randomizing code from http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
 };
-
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -18,7 +18,7 @@ var Enemy = function() {
     //set row
     this.row = [61, 144, 310, 500];
     this.y = this.row[Math.floor(Math.random()* this.row.length)]
-    //this.y = randomized(this.row[0], this.row[3]);
+    //randomizing code from http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
     //set speed for Enemy
     this.speed = randomized(115, 50);
 };
