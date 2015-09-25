@@ -16,7 +16,8 @@ var Enemy = function() {
     //set position horizontally
     this.x = randomized(505, 1);
     //set row
-    this.row = [61, 144, 310, 500];
+    this.row = [61, 144, 225];
+    //this.y = randomized(this.row[0], this.row[2]);
     this.y = this.row[Math.floor(Math.random()* this.row.length)]
     //randomizing code from http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
     //set speed for Enemy
@@ -32,6 +33,7 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     //update the enemy based on time difference
     this.x += this.speed * dt;
+    //code from https://discussions.udacity.com/t/how-to-get-enemies-to-start-off-canvas/31684/3
     //reset enemy to left side of screen
     if(this.x > 505) {
         this.x = -100;
@@ -71,14 +73,14 @@ Player.prototype.handleInput = function(key) {
             if (player.y <= -22) {
                 player.y = -27;
             } else {
-                player.y -= 83;
+                player.y -= 75;
             }
             break;
         case 'down':
             if (player.y >= 388) {
                 player.y = 388;
             } else {
-                player.y += 83
+                player.y += 75
             }
             break;
         case 'left':
