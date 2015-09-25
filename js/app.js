@@ -2,7 +2,7 @@
 function randomized (max, min) {
     //generate a random number
     return Math.floor((Math.random()* (max - min)) + min);
-    //randomizing code from http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
+    //code credit: http://stackoverflow.com/questions/1527803/generating-random-numbers-in-javascript-in-a-specific-range
 };
 
 // Enemies our player must avoid
@@ -19,7 +19,7 @@ var Enemy = function() {
     this.row = [61, 144, 225];
     //this.y = randomized(this.row[0], this.row[2]);
     this.y = this.row[Math.floor(Math.random()* this.row.length)]
-    //randomizing code from http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
+    //code credit: http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
     //set speed for Enemy
     this.speed = randomized(115, 50);
 };
@@ -33,12 +33,11 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     //update the enemy based on time difference
     this.x += this.speed * dt;
-    //code from https://discussions.udacity.com/t/how-to-get-enemies-to-start-off-canvas/31684/3
     //reset enemy to left side of screen
     if(this.x > 505) {
         this.x = -100;
     }
-};
+}; //code credit: https://discussions.udacity.com/t/how-to-get-enemies-to-start-off-canvas/31684/3
 
 Enemy.prototype.enemyReset = function(){
     for (var i=0; i < allEnemies.length; i++)
@@ -107,19 +106,19 @@ Player.prototype.render = function() {
 
 Player.prototype.collide = function(){
     for (var i=0; i < allEnemies.length; i++) {
-        if (this.x < allEnemies[i].x + 50 && this.x + 50 > allEnemies[i].x && this.y < allEnemies[i].y + 30 && this.y + 30 > allEnemies[i].y) {
+        if (this.x < allEnemies[i].x + 60 && this.x + 60 > allEnemies[i].x && this.y < allEnemies[i].y + 70 && this.y + 70 > allEnemies[i].y) {
             console.log("Oops!");
             resetPlayer();
             break;
         }
     }
-}
+}//code credit: https://discussions.udacity.com/t/player-bug-collision-problem/15068/9
 
 Player.prototype.win = function() {
     for (var i=0; i < allEnemies.length; i++) {
         if (this.y <= -10) {
-            prompt("Hooray! You made it across! Would you like to play again?");
-                if (userAnswer === "yes"){
+            if (confirm("Hooray! You made it across! Would you like to play again?")){
+            //code credit: http://stackoverflow.com/questions/9334636/javascript-yes-no-alert
                     resetPlayer();
                     allEnemies[i].enemyReset();
                 } else {
@@ -139,8 +138,7 @@ Player.prototype.update = function(dt) {
  };
 
 // Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+//Create enemies
 var allEnemies = [
     new Enemy,
     new Enemy,
@@ -150,14 +148,16 @@ var allEnemies = [
 //create player
 var player = new Player();
 
+//Upon collision, send player back to starting position
 var resetPlayer = function() {
-    player.x = (ctx.canvas.width / 2) - (101/2);
+    //place player at middle of bottom row.
+    player.x = 200;
     player.y = 425;
 };
 
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Lsten for key presses and send the keys to the
+// Player.handleInput() method. Don't modify!
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
