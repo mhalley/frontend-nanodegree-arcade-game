@@ -97,7 +97,7 @@ Player.prototype.handleInput = function(key) {
             }
             break;
     }
-};
+};//credit: https://discussions.udacity.com/t/player-handleinput-and-update-methods/4666/2
 
 //render player on screen
 Player.prototype.render = function() {
@@ -123,6 +123,7 @@ Player.prototype.win = function() {
                     allEnemies[i].enemyReset();
                 } else {
                     alert("O.K. Thanks for playing!");
+                    resetPlayer();
                 }
             break;
         }
