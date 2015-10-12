@@ -16,7 +16,7 @@ var Enemy = function() {
     //set position horizontally
     this.x = randomized(505, 1);
     //set row
-    this.row = [61, 144, 225];
+    this.row = [61, 144, 225, 315];
     //this.y = randomized(this.row[0], this.row[2]);
     this.y = this.row[Math.floor(Math.random()* this.row.length)]
     //code credit: http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
@@ -143,6 +143,7 @@ Player.prototype.update = function(dt) {
 var allEnemies = [
     new Enemy,
     new Enemy,
+    new Enemy,
     new Enemy
 ];
 
@@ -157,7 +158,7 @@ var resetPlayer = function() {
 };
 
 
-// Lsten for key presses and send the keys to the
+// Listen for key presses and send the keys to the
 // Player.handleInput() method. Don't modify!
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
