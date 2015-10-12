@@ -111,7 +111,7 @@ Player.prototype.collide = function(){
             console.log("Oops! Start again.");
             resetPlayer();
             scoreBoard.removePoint();
-            document.getElementById('score').innerHTML = "Score: " + ScoreBoard.currentScore;
+            //document.getElementById('score').innerHTML = "Score: " + scoreBoard.currentScore;
             break;
         }
     }
@@ -120,7 +120,7 @@ Player.prototype.collide = function(){
             console.log("You get a point!");
             scoreBoard.addPoint();
             allGems[i].x = -200;
-            document.getElementById('score').innerHTML = "Score: " + ScoreBoard.currentScore;
+            //document.getElementById('score').innerHTML = "Score: " + scoreBoard.currentScore;
             break;
         }
     }
@@ -198,17 +198,21 @@ Gem.prototype.render = function() {
 var ScoreBoard = function (currentScore) {
     this.currentScore = currentScore;
     console.log('ScoreBoard created');
+    //$("#score").text("Score: " + currentScore);
+    //document.getElementById('score').html = "Score: " + 0;
 };//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
 //Add points to score
 ScoreBoard.prototype.addPoint = function() {
-    this.currentScore + 1;
+    console.log(this.currentScore + 1);
+    //document.getElementById('score').innerHTML = "Score: " + score;
 };//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
 //Remove points if points have been gained
 ScoreBoard.prototype.removePoint = function() {
-    if (this.currentScore > 0) {    
-        this.currentScore - 1;
+    if (this.currentScore > 0) {
+        console.log(this.currentScore - 1);
+        //document.getElementById('score').innerHTML = "Score: " + (this.currentScore - 1);
     } else {this.currentScore = 0}
 };//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
