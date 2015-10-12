@@ -99,6 +99,7 @@ Player.prototype.handleInput = function(key) {
     }
 };//credit: https://discussions.udacity.com/t/player-handleinput-and-update-methods/4666/2
 
+/////////////////////////////
 //render player on screen
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -109,6 +110,13 @@ Player.prototype.collide = function(){
         if (this.x < allEnemies[i].x + 60 && this.x + 60 > allEnemies[i].x && this.y < allEnemies[i].y + 70 && this.y + 70 > allEnemies[i].y) {
             console.log("Oops!");
             resetPlayer();
+            break;
+        }
+    }
+    for (var i=0; i < allGems.length; i++) {
+        if (this.x < allGems[i].x + 60 && this.x + 60 > allGems[i].x && this.y < allGems[i].y + 70 && this.y + 70 > allGems[i].y) {
+            console.log("You get a point!");
+            addPoint();
             break;
         }
     }
@@ -138,6 +146,53 @@ Player.prototype.update = function(dt) {
     player.win();
  };
 
+/////////////////////////////////
+//Place Gems
+// Enemies our player must avoid
+var Gem = function() {
+    // Variables applied to each of our instances go here,
+    // we've provided one for you to get started
+    //this.orientation = this.getOrientation();
+    // The image/sprite for our enemies, this uses
+    // a helper we've provided to easily load images
+    this.sprite = 'images/gem-orange.png';
+    //set position horizontally
+    this.x = randomized(505, 1);
+    //set row
+    this.row = [100, 182, 268, 350];
+    //this.y = randomized(this.row[0], this.row[2]);
+    this.y = this.row[Math.floor(Math.random()* this.row.length)]
+    //code credit: http://stackoverflow.com/questions/4550505/getting-random-value-from-an-array
+    //set speed for Enemy
+    this.speed = randomized(30, 20);
+};
+
+
+// Update the enemy's position, required method for game
+// Parameter: dt, a time delta between ticks
+Gem.prototype.update = function(dt) {
+    // You should multiply any movement by the dt parameter
+    // which will ensure the game runs at the same speed for
+    // all computers.
+    //update the enemy based on time difference
+    this.x += this.speed * dt;
+    //reset enemy to left side of screen
+    if(this.x > 505) {
+        this.x = -100;
+    }
+}; //code credit: https://discussions.udacity.com/t/how-to-get-enemies-to-start-off-canvas/31684/3
+
+Gem.prototype.gemReset = function(){
+    for (var i=0; i < allGems.length; i++)
+        allGems[i].x = -200;
+}
+
+// Draw the enemy on the screen, required method for game
+Gem.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+
 // Now instantiate your objects.
 //Create enemies
 var allEnemies = [
@@ -145,6 +200,14 @@ var allEnemies = [
     new Enemy,
     new Enemy,
     new Enemy
+];
+
+//Create gems
+var allGems = [
+    new Gem,
+    new Gem,
+    new Gem,
+    new Gem
 ];
 
 //create player
@@ -156,6 +219,8 @@ var resetPlayer = function() {
     player.x = 200;
     player.y = 425;
 };
+
+
 
 
 // Listen for key presses and send the keys to the
