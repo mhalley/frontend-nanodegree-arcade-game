@@ -108,15 +108,17 @@ Player.prototype.render = function() {
 Player.prototype.collide = function(){
     for (var i=0; i < allEnemies.length; i++) {
         if (this.x < allEnemies[i].x + 60 && this.x + 60 > allEnemies[i].x && this.y < allEnemies[i].y + 70 && this.y + 70 > allEnemies[i].y) {
-            console.log("Oops!");
+            console.log("Oops! Start again.");
             resetPlayer();
+            scoreBoard.removePoint();
             break;
         }
     }
     for (var i=0; i < allGems.length; i++) {
         if (this.x < allGems[i].x + 60 && this.x + 60 > allGems[i].x && this.y < allGems[i].y + 70 && this.y + 70 > allGems[i].y) {
             console.log("You get a point!");
-            addPoint();
+            scoreBoard.addPoint();
+            allGems[i].x = -200;
             break;
         }
     }
@@ -148,12 +150,9 @@ Player.prototype.update = function(dt) {
 
 /////////////////////////////////
 //Place Gems
-// Enemies our player must avoid
+// Gems our player can gather for points
 var Gem = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-    //this.orientation = this.getOrientation();
-    // The image/sprite for our enemies, this uses
+    // The image/sprite for our gems, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/gem-orange.png';
     //set position horizontally
@@ -168,29 +167,48 @@ var Gem = function() {
 };
 
 
-// Update the enemy's position, required method for game
+// Update the gems's position, required method for game
 // Parameter: dt, a time delta between ticks
 Gem.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
-    //update the enemy based on time difference
+    //update the gem based on time difference
     this.x += this.speed * dt;
-    //reset enemy to left side of screen
+    //reset gem to left side of screen
     if(this.x > 505) {
         this.x = -100;
     }
 }; //code credit: https://discussions.udacity.com/t/how-to-get-enemies-to-start-off-canvas/31684/3
 
+//reset Gem after moves off the canvas
 Gem.prototype.gemReset = function(){
     for (var i=0; i < allGems.length; i++)
         allGems[i].x = -200;
 }
 
-// Draw the enemy on the screen, required method for game
+// Draw the gem on the screen, required method for game
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
+
+//Create Scoreboard
+var ScoreBoard = function (currentScore) {
+this.currentScore = currentScore;
+console.log('ScoreBoard created');
+};//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
+
+//Add points to score
+ScoreBoard.prototype.addPoint = function() {
+console.log(this.currentScore = this.currentScore + 1);
+};//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
+
+//Remove points if points have been gained
+ScoreBoard.prototype.removePoint = function() {
+    if (this.currentScore > 0) {    
+        console.log(this.currentScore = this.currentScore - 1);
+    } else {this.currentScore = 0}
+};//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
 
 // Now instantiate your objects.
@@ -220,7 +238,10 @@ var resetPlayer = function() {
     player.y = 425;
 };
 
-
+//Create Score Board and points
+var scoreBoard = new ScoreBoard(0);
+var addFunction = scoreBoard.addPoint;
+var removeFunction = scoreBoard.removePoint;
 
 
 // Listen for key presses and send the keys to the
