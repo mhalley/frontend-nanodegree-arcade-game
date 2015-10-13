@@ -203,14 +203,14 @@ var ScoreBoard = function (currentScore) {
 //Add points to score
 ScoreBoard.prototype.addPoint = function() {
     //console.log(this.currentScore = this.currentScore + 1);
-    document.getElementById('score').innerHTML = "Score: " + (this.currentScore = this.currentScore + 1);
+    document.getElementById('score').innerHTML = this.currentScore = this.currentScore + 1;
 };//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
 //Remove points if points have been gained
 ScoreBoard.prototype.removePoint = function() {
     if (this.currentScore > 0) {
         //console.log(this.currentScore = this.currentScore - 1);
-        document.getElementById('score').innerHTML = "Score: " + (this.currentScore = this.currentScore - 1);
+        document.getElementById('score').innerHTML = this.currentScore = this.currentScore - 1;
     } else {this.currentScore = 0}
 };//source: http://stackoverflow.com/questions/28822849/score-board-object-in-javascript
 
