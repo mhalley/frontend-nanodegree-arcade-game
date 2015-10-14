@@ -127,7 +127,7 @@ Player.prototype.collide = function(){
 Player.prototype.win = function() {
     for (var i=0; i < allEnemies.length; i++) {
         if (this.y <= -10) {
-            if (confirm("Hooray! You made it across! Would you like to play again?")){
+            if (confirm("Hooray! You made it across with " + scoreBoard.currentScore + " points! Would you like to play again?")){
             //code credit: http://stackoverflow.com/questions/9334636/javascript-yes-no-alert
                     resetPlayer();
                     allEnemies[i].enemyReset();
