@@ -69,31 +69,31 @@ function Player () {
 Player.prototype.handleInput = function(key) {
     switch(key) {
         case 'up':
-            if (player.y <= -22) {
-                player.y = -27;
+            if (this.y <= -22) {
+                this.y = -27;
             } else {
-                player.y -= 75;
+                this.y -= 75;
             }
             break;
         case 'down':
-            if (player.y >= 388) {
-                player.y = 388;
+            if (this.y >= 388) {
+                this.y = 388;
             } else {
-                player.y += 75
+                this.y += 75
             }
             break;
         case 'left':
-            if (player.x <= 0) {
-                player.x = 0;
+            if (this.x <= 0) {
+                this.x = 0;
             } else {
-                player.x -= 101;
+                this.x -= 101;
             }
             break;
         case 'right':
-            if (player.x >= 400) {
-                player.x = 404;
+            if (this.x >= 400) {
+                this.x = 404;
             } else {
-                player.x += 101;
+                this.x += 101;
             }
             break;
     }
