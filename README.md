@@ -1,11 +1,10 @@
 #Ladybug Lane
-===============================
 
 Welcome to Ladybug Lane, an arcade-style game where you collect gems and avoid ladybugs as you navigate to the other side of the road.
 
 
 ##INSTALLATION
-Clone the GitHub repository. You can do this in your terminal by typing:
+Clone the GitHub repository. You can do this in your terminal by cd to your desired folder and typing:
 
 `$ git clone https://github.com/mhalley/frontend-nanodegree-arcade-game.git`
 
