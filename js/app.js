@@ -109,7 +109,7 @@ Player.prototype.collide = function(){
     for (var i=0; i < allEnemies.length; i++) {
         if (this.x < allEnemies[i].x + 60 && this.x + 60 > allEnemies[i].x && this.y < allEnemies[i].y + 70 && this.y + 70 > allEnemies[i].y) {
             console.log("Oops! Start again.");
-            resetPlayer();
+            this.reset();
             scoreBoard.removePoint();
             break;
         }
@@ -129,11 +129,11 @@ Player.prototype.win = function() {
         if (this.y <= -10) {
             if (confirm("Hooray! You made it across with " + scoreBoard.currentScore + " points! Would you like to play again?")){
             //code credit: http://stackoverflow.com/questions/9334636/javascript-yes-no-alert
-                    resetPlayer();
+                    this.reset();
                     allEnemies[i].enemyReset();
                 } else {
                     alert("O.K. Thanks for playing!");
-                    resetPlayer();
+                    this.reset();
                 }
             break;
         }
@@ -147,6 +147,13 @@ Player.prototype.update = function(dt) {
     player.collide();
     player.win();
  };
+
+ //Upon collision, send player back to starting position
+Player.prototype.reset = function() {
+    //place player at middle of bottom row.
+    player.x = 200;
+    player.y = 425;
+};
 
 /////////////////////////////////
 //Place Gems
@@ -235,12 +242,6 @@ var allGems = [
 //create player
 var player = new Player();
 
-//Upon collision, send player back to starting position
-var resetPlayer = function() {
-    //place player at middle of bottom row.
-    player.x = 200;
-    player.y = 425;
-};
 
 //Create Score Board and points
 var scoreBoard = new ScoreBoard(0);
