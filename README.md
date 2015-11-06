@@ -1,6 +1,24 @@
-frontend-nanodegree-arcade-game
+#Ladybug Lane
 ===============================
 
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+Welcome to Ladybug Lane, an arcade-style game where you collect gems and avoid ladybugs as you navigate to the other side of the road.
 
-for self-checking their submission.
+
+##INSTALLATION
+Clone the GitHub repository. You can do this in your terminal by typing:
+
+`$ git clone https://github.com/mhalley/frontend-nanodegree-arcade-game.git`
+
+
+##LOADING
+
+The game will start running when you open the index.html file in any browser.
+
+
+##PLAYING
+
+Use your keyboard's arrow keys to help your player get across the road to the water. You can gain points by collecting gems, but watch out for bugs! If you run into a ladybug, you'll lose a point and be sent back to the start!
+
+
+##LICENSE
+Ladybug Lane is released under the [MIT License](http://choosealicense.com/licenses/mit/)]
